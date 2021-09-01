@@ -73,13 +73,15 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
-const crateUsernames = function (user) {
-  const username = user
-    .toLowerCase()
-    .split(" ")
-    .map((name) => name[0])
-    .join("");
-  return username;
+const crateUsernames = function (accounts) {
+  accounts.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
 };
 
-console.log(crateUsernames("Sandro Maisuradze"));
+crateUsernames(accounts);
+console.log(accounts);
