@@ -73,6 +73,13 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} ₾`;
+};
+
+calcPrintBalance(account1.movements);
+
 const crateUsernames = function (accounts) {
   accounts.forEach(function (acc) {
     acc.username = acc.owner
@@ -84,4 +91,3 @@ const crateUsernames = function (accounts) {
 };
 
 crateUsernames(accounts);
-console.log(accounts);
