@@ -76,19 +76,20 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} ₾`;
 };
 
-const calccDisplaySummary = function (movements) {
-  const incomes = movements
+const calccDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes} ₾`;
-  const out = movements
+
+  const out = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}₾`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov) => mov > 0)
-    .map((deposit) => (deposit * 1.4) / 100)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       return int >= 1;
     })
@@ -122,8 +123,11 @@ btnLogin.addEventListener("click", function (e) {
       currentAccount.owner.split(" ")[0]
     }`;
     containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = "";
+    inputLoginPin.blur();
+
     displayMovements(currentAccount.movements);
     calcDisplayBalance(currentAccount.movements);
-    calccDisplaySummary(currentAccount.movements);
+    calccDisplaySummary(currentAccount);
   }
 });
