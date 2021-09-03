@@ -131,3 +131,12 @@ btnLogin.addEventListener("click", function (e) {
     calccDisplaySummary(currentAccount);
   }
 });
+
+btnTransfer.addEventListener("click", function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const resiverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value
+  );
+  console.log(amount, resiverAcc);
+});
