@@ -71,14 +71,10 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
-const calcPrintBalance = function (movements) {
+const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} ₾`;
 };
-
-calcPrintBalance(account1.movements);
 
 const calccDisplaySummary = function (movements) {
   const incomes = movements
@@ -99,7 +95,6 @@ const calccDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}₾`;
 };
-calccDisplaySummary(account1.movements);
 
 const crateUsernames = function (accounts) {
   accounts.forEach(function (acc) {
@@ -122,6 +117,13 @@ btnLogin.addEventListener("click", function (e) {
     (acc) => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-  if (currentAccount?.pin === Number(inputLoginPin.value));
-  console.log("LOGIN");
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `კეთილი იყოს შენი დაბრუნება , ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    containerApp.style.opacity = 100;
+    displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
+    calccDisplaySummary(currentAccount.movements);
+  }
 });
