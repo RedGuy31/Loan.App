@@ -154,10 +154,6 @@ const updateUI = function (acc) {
 
 // events
 let currentAccount;
-//always logged in
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
 
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
